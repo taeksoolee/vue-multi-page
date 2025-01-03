@@ -8,11 +8,25 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
-    "noUncheckedSideEffectImports": true
+    "noUncheckedSideEffectImports": true,
+
+    "types": ["vite/client", "vue"],
+    
+    "baseUrl": ".",
+    "paths": {
+      "@components/*": ["common/components/*"],
+      "@utils/*": ["common/utils/*"],
+      "@web/*": ["web/src/*"],
+      "@admin/*": ["admin/src/*"]
+    }
   },
   "include": [
-    "web/src/**/*.ts", "web/src/**/*.tsx", "web/src/**/*.vue",
-    "admin/src/**/*.ts", "admin/src/**/*.tsx", "admin/src/**/*.vue",
-    "cms/src/**/*.ts", "cms/src/**/*.tsx", "cms/src/**/*.vue"
-  ]
+    "types/**/*.d.ts",
+    "web/src/**/*.d.ts", "web/src/**/*.ts", "web/src/**/*.vue",
+    "admin/src/**/*.d.ts", "admin/src/**/*.ts", "admin/src/**/*.vue",
+    // "cms/src/**/*.ts", "cms/src/**/*.vue",
+    "common/components/**/*.d.ts", "common/components/**/*.ts", "common/components/**/*.vue",
+    "common/utils/**/*.d.ts", "common/utils/**/*.ts",
+  ],
+  "exclude": ["node_modules"],
 }

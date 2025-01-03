@@ -6,7 +6,7 @@ import { resolve } from 'path';
 export default defineConfig({
   plugins: [vue()],
   server: {
-    port: 3001,
+    port: 3002,
   },
   root: process.env.VITE_ROOT,
   publicDir: resolve(__dirname, 'public'),
@@ -14,14 +14,14 @@ export default defineConfig({
     alias: {
       '@components': resolve(__dirname, '..', 'common', 'components'),
       '@utils': resolve(__dirname, '..', 'common', 'utils'),
-      '@web': resolve(__dirname, 'src'),
+      '@admin': resolve(__dirname, 'src'),
     },
   },
   build: {
     emptyOutDir: false,
     rollupOptions: {
       input: {
-        web: resolve(__dirname, 'index.html'),
+        admin: resolve(__dirname, 'index.html'),
       },
       output: {
         entryFileNames: ({ name }) => `${name}/assets/[name].[hash].js`,

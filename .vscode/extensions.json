@@ -1,0 +1,5 @@
+{
+  "recommendations": ["Vue.volar"],
+  "typescript.autoImportSuggestions.enabled": true, 
+  "javascript.autoImportSuggestions.enabled": true
+}
