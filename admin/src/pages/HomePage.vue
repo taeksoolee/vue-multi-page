@@ -9,7 +9,7 @@ const result = ref(add(1, 2));
 </script>
 
 <template>
-  <h2>HomePage</h2>
+  <h2>Home Page</h2>
   <h3>{{ title }}</h3>
   <p>add result : {{ result }}</p>
   <HelloVue />
