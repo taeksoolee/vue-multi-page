@@ -1,7 +1,13 @@
 <script setup lang="ts">
-import { useRouteLink } from './hooks/useRouteLink';
+import { useRouter } from 'vue-router';
+import { useRouterLink } from './hooks/useRouterLink';
+import { computed } from 'vue';
 
-const { createLinkPath } = useRouteLink();
+const { createLinkPath } = useRouterLink();
+
+const router = useRouter();
+
+const isNotFound = computed(() => !!router.currentRoute.value.meta.isNotFound);
 </script>
 
 <template>
@@ -9,7 +15,7 @@ const { createLinkPath } = useRouteLink();
     <h1>Web</h1>
   </header>
 
-  <nav>
+  <nav v-if="!isNotFound">
     <ul>
       <li><a href="//localhost:3002">Admin</a></li>
       <li><a href="//localhost:3003">CMS</a></li>

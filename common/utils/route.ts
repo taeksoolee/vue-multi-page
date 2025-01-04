@@ -1,8 +1,7 @@
 import { createMemoryHistory, createWebHistory, type RouteRecordRaw } from "vue-router";
-import { isServer } from "@utils/is";
-import type { Mode } from "@interfaces/types";
+import { isServer, mode } from "@utils/is";
 
-export const createSSGRouteRecordRawSet: (name: string, path: string, component: any, mode?: Mode) => RouteRecordRaw[] = (name, path, component, mode) => {
+export const createSSGRouteRecordRawSet: (name: string, path: string, component: any) => RouteRecordRaw[] = (name, path, component) => {
   if (isServer || mode === 'local') {
     return [{ name, path, component },];
   }

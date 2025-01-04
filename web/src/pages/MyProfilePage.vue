@@ -2,12 +2,9 @@
 import { useHead } from '@unhead/vue';
 import { storeToRefs } from 'pinia';
 import { useBootStore } from '@web/store';
-import { useRouterLink } from '@web/hooks/useRouterLink';
-
-const { createLinkPath } = useRouterLink();
 
 useHead({
-  title: 'My Page in Web',
+  title: 'My Profile Page in Web',
   meta: [
     { name: 'description', content: 'description for web', },
     { name: 'keywords', content: 'vue, vue3, typescript', },
@@ -18,7 +15,7 @@ useHead({
 
     { property: 'og:type', content: 'website', },
     { property: 'og:url', content: 'https://vuejs.org/', },
-    { property: 'og:title', content: 'My Page in Web', },
+    { property: 'og:title', content: 'My Profile Page in Web', },
     { property: 'og:image', content: 'https://cdn.prod.website-files.com/62865614b39c464b76d339aa/6634129dd4caaf0cbfc2d310_Vue-original.svg', },
     { property: 'og:description', content: 'description for web', },
     { property: 'og:site:name', content: 'web', },
@@ -27,7 +24,7 @@ useHead({
     { property: 'og:image:height', content: '630', },
 
     { property: 'twitter:card', content: 'summary_large_image', },
-    { property: 'twitter:title', content: 'My Page in Web', },
+    { property: 'twitter:title', content: 'My Profile Page in Web', },
     { property: 'twitter:description', content: 'description for web', },
     { property: 'twitter:image', content: 'https://cdn.prod.website-files.com/62865614b39c464b76d339aa/6634129dd4caaf0cbfc2d310_Vue-original.svg', },
   ],
@@ -38,13 +35,7 @@ const { ready } = storeToRefs(bootStore);
 </script>
 
 <template>
-  <h2>My Page</h2>
+  <h2>My Profile Page</h2>
 
   <p>ready : {{ ready }}</p>
-
-  <div>
-    <router-link :to="{path: createLinkPath('/my/profile')}">
-      profile
-    </router-link>
-  </div>
 </template>

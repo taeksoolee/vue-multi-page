@@ -5,7 +5,7 @@ import { isLocal } from '@utils/is'
 /**
  * route-link helper
  */
-export const useRouteLink = () => {
+export const useRouterLink = () => {
   const bootStore = useBootStore();
   const { mode } = storeToRefs(bootStore);
 

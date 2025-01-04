@@ -8,6 +8,7 @@ const __dirname = fileURLToPath(new URL(".", import.meta.url));
 
 const web = new koa();
 const webStaticPath = path.resolve(__dirname, '..', 'web', 'dist');
+const webNotFoundFileName = 'not-found.html';
 web.use(serve(webStaticPath));
 web.use(async (ctx) => {
   const filePath = path.join(webStaticPath, ctx.path);
@@ -16,7 +17,7 @@ web.use(async (ctx) => {
     ctx.body = fs.createReadStream(filePath);
   } else {
     ctx.type = 'text/html';
-    ctx.body = fs.createReadStream(path.join(webStaticPath, 'index.html'));
+    ctx.body = fs.createReadStream(path.join(webStaticPath, webNotFoundFileName));
   }
 });
 web.listen(3001, () => {

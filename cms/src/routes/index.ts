@@ -9,6 +9,7 @@ export const routes = mergeRouteRecordRawSets([
   createRouteRecordRawSet('home', '/', HomePage),
   createRouteRecordRawSet('about', '/about', AboutPage),
   createRouteRecordRawSet('profile', '/profile', ProfilePage),
+  [ { path: '/:pathMatch(.*)*', redirect: '/' }, ],
 ]);
 
 export const router = createRouter({
