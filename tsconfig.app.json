@@ -16,17 +16,20 @@
     "paths": {
       "@components/*": ["common/components/*"],
       "@utils/*": ["common/utils/*"],
+      "@interfaces/*": ["common/interfaces/*"],
       "@web/*": ["web/src/*"],
-      "@admin/*": ["admin/src/*"]
+      "@admin/*": ["admin/src/*"],
+      "@cms/*": ["cms/src/*"]
     }
   },
   "include": [
     "types/**/*.d.ts",
     "web/src/**/*.d.ts", "web/src/**/*.ts", "web/src/**/*.vue",
     "admin/src/**/*.d.ts", "admin/src/**/*.ts", "admin/src/**/*.vue",
-    // "cms/src/**/*.ts", "cms/src/**/*.vue",
+    "cms/src/**/*.d.ts", "cms/src/**/*.ts", "cms/src/**/*.vue",
     "common/components/**/*.d.ts", "common/components/**/*.ts", "common/components/**/*.vue",
     "common/utils/**/*.d.ts", "common/utils/**/*.ts",
+    "common/interfaces/**/*.d.ts", "common/interfaces/**/*.ts",
   ],
   "exclude": ["node_modules"],
 }

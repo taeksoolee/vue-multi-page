@@ -1,18 +1,10 @@
 <script setup lang="ts">
-import { ref } from 'vue';
-import HelloVue from '@components/Hello.vue';
-import HelloWebVue from '@web/components/HelloWeb.vue';
-import { add } from '@utils/math';
+import Layout from './Layout.vue';
 
-const title = ref('Hello');
-
-const b = ref(add(1, 2));
 </script>
 
 <template>
-  <h1>Web</h1>
-  <h2>{{ title }}</h2>
-  <p>add result : {{ b }}</p>
-  <HelloVue />
-  <HelloWebVue />
+  <Layout>
+    <router-view />
+  </Layout>
 </template>

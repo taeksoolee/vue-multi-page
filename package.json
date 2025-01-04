@@ -6,22 +6,28 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "npm run dev:web & npm run dev:admin",
-    "dev:web": "VITE_ROOT=./web vite --config ./web/vite.config.ts",
-    "dev:admin": "VITE_ROOT=./admin vite --config ./admin/vite.config.ts",
-    "type": "vue-tsc -b",
-    "build:web": "vite build --config ./web/vite.config.ts",
+    "dev": "npm run dev:web & npm run dev:admin & npm run dev:cms",
+    "dev:web": "VITE_MODE=local vite --config ./web/vite.config.ts",
+    "dev:admin": "VITE_MODE=local vite --config ./admin/vite.config.ts",
+    "dev:cms": "VITE_MODE=local vite --config ./cms/vite.config.ts",
+    "type": "vue-tsc",
+    "build:web": "vite-ssg build --config ./web/vite.config.ts",
     "build:admin": "vite build --config ./admin/vite.config.ts",
-    "build": "npm run type & npm run build:web & npm run build:admin",
-    "preview": "vite preview --config ./web/vite.config.ts"
+    "build:cms": "vite build --config ./cms/vite.config.ts",
+    "build": "npm run type && npm run build:web && npm run build:admin && npm run build:cms",
+    "_preview:web": "vite preview --config ./web/vite.config.ts",
+    "test:serve": "node server/index.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "vue": "^3.5.13"
+    "pinia": "^2.3.0",
+    "vue": "^3.5.13",
+    "vue-router": "^4.5.0"
   },
   "devDependencies": {
+    "@types/express": "^5.0.0",
     "@types/node": "^22.10.4",
     "@unhead/vue": "^1.11.14",
     "@vitejs/plugin-vue": "^5.2.1",
@@ -30,10 +36,16 @@
     "@vue/tsconfig": "^0.7.0",
     "eslint": "^9.17.0",
     "eslint-plugin-vue": "^9.32.0",
+    "express": "^4.21.2",
+    "npm-run-all": "^4.1.5",
+    "ts-node": "^10.9.2",
+    "tsx": "^4.19.2",
     "typescript": "^5.7.2",
     "vite": "^6.0.7",
+    "vite-plugin-minify": "^2.1.0",
+    "vite-plugin-static-copy": "^2.2.0",
+    "vite-plugin-vue-devtools": "^7.6.8",
     "vite-ssg": "^0.24.3",
-    "vue-router": "^4.5.0",
     "vue-tsc": "^2.2.0"
   }
 }

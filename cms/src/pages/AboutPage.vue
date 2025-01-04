@@ -2,5 +2,5 @@
 </script>
 
 <template>
-  <p>Common Hello Component</p>
+  <h2>About Page</h2>
 </template>

@@ -1,31 +1,65 @@
-import { defineConfig } from 'vite';
-import vue from '@vitejs/plugin-vue';
 import { resolve } from 'path';
+import vue from '@vitejs/plugin-vue';
+import { defineConfig, UserConfig } from 'vite';
+import { viteStaticCopy } from 'vite-plugin-static-copy';
+import { ViteMinifyPlugin } from 'vite-plugin-minify';
+import vueDevTools from 'vite-plugin-vue-devtools';
 
 // https://vite.dev/config/
-export default defineConfig({
-  plugins: [vue()],
-  server: {
-    port: 3001,
-  },
-  root: process.env.VITE_ROOT,
-  publicDir: resolve(__dirname, 'public'),
-  resolve: {
-    alias: {
-      '@components': resolve(__dirname, '..', 'common', 'components'),
-      '@utils': resolve(__dirname, '..', 'common', 'utils'),
-      '@web': resolve(__dirname, 'src'),
-    },
-  },
-  build: {
-    emptyOutDir: false,
-    rollupOptions: {
-      input: {
-        web: resolve(__dirname, 'index.html'),
-      },
-      output: {
-        entryFileNames: ({ name }) => `${name}/assets/[name].[hash].js`,
+export default defineConfig(({ mode }) => {
+  const publicDir = 'public';
+  const buildDir = 'web';
+  const devServerPort = 3001;
+
+  const config: UserConfig = {
+    mode,
+    plugins: [
+      vue(),
+      ViteMinifyPlugin({
+        removeComments: true,
+        collapseWhitespace: true,
+      }),
+    ],
+    resolve: {
+      alias: {
+        '@components': resolve(__dirname, '..', 'common', 'components'),
+        '@utils': resolve(__dirname, '..', 'common', 'utils'),
+        '@interfaces': resolve(__dirname, '..', 'common', 'interfaces'),
+        [`@${buildDir}`]: resolve(__dirname, 'src'),
       },
     },
-  },
+  };
+
+  config.root = `./${buildDir}`;
+
+  if (mode === 'development') {
+    config.server = {
+      port: devServerPort,
+    };
+
+    config.plugins!.push(vueDevTools());
+  } else {
+    config.plugins!.push(
+      viteStaticCopy({
+        targets: [
+          {
+            src: `${publicDir}/*`,
+            dest: '.',
+          },
+        ],
+      })
+    );
+
+    config.build = {
+      emptyOutDir: false,
+      rollupOptions: {
+        input: resolve(__dirname, 'index.html'),
+        output: {
+          entryFileNames: () => `assets/[name].[hash].js`,
+        },
+      },
+    }
+  }
+
+  return config;
 });

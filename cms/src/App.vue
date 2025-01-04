@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import Layout from '@admin/Layout.vue';
+import Layout from '@cms/Layout.vue';
 
 </script>
 

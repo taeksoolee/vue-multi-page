@@ -9,8 +9,8 @@ import vueDevTools from 'vite-plugin-vue-devtools';
 export default defineConfig(({ mode }) => {
   const isDev = process.env.VITE_DEV !== '0';
   const publicDir = 'public';
-  const buildDir = 'admin';
-  const devServerPort = 3002;
+  const buildDir = 'cms';
+  const devServerPort = 3003;
 
   const config: UserConfig = {
     plugins: [

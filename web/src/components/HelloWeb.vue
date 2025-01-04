@@ -1,3 +1,3 @@
 <template>
-  <h2>Hello Web</h2>
+  <p>Web Hello Component</p>
 </template>

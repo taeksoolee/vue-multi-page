@@ -1,3 +1,3 @@
 <template>
-  <h2>Hello Admin</h2>
+  <p>Admin Hello Component</p>
 </template>
