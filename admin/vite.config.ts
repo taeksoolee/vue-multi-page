@@ -8,6 +8,7 @@ import vueDevTools from 'vite-plugin-vue-devtools';
 // https://vite.dev/config/
 export default defineConfig(({ mode }) => {
   const isDev = process.env.VITE_DEV !== '0';
+  const isLocal = process.env.VITE_MODE === 'local';
   const publicDir = 'public';
   const buildDir = 'admin';
   const devServerPort = 3002;
@@ -15,10 +16,6 @@ export default defineConfig(({ mode }) => {
   const config: UserConfig = {
     plugins: [
       vue(),
-      ViteMinifyPlugin({
-        removeComments: true,
-        collapseWhitespace: true,
-      }),
     ],
     resolve: {
       alias: {
@@ -32,13 +29,20 @@ export default defineConfig(({ mode }) => {
 
   config.root = `./${buildDir}`;
 
-  if (isDev) {
+  if (isLocal) {
     config.server = {
       port: devServerPort,
     };
 
     config.plugins!.push(vueDevTools());
   } else {
+    config.plugins!.push(
+      ViteMinifyPlugin({
+        removeComments: true,
+        collapseWhitespace: true,
+      })
+    );
+
     config.plugins!.push(
       viteStaticCopy({
         targets: [

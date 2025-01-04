@@ -3,10 +3,12 @@ import vue from '@vitejs/plugin-vue';
 import { defineConfig, UserConfig } from 'vite';
 import { viteStaticCopy } from 'vite-plugin-static-copy';
 import { ViteMinifyPlugin } from 'vite-plugin-minify';
-import vueDevTools from 'vite-plugin-vue-devtools';
+// import vueDevTools from 'vite-plugin-vue-devtools';
 
 // https://vite.dev/config/
 export default defineConfig(({ mode }) => {
+  const isLocal = process.env.VITE_MODE === 'local';
+
   const publicDir = 'public';
   const buildDir = 'web';
   const devServerPort = 3001;
@@ -15,10 +17,6 @@ export default defineConfig(({ mode }) => {
     mode,
     plugins: [
       vue(),
-      ViteMinifyPlugin({
-        removeComments: true,
-        collapseWhitespace: true,
-      }),
     ],
     resolve: {
       alias: {
@@ -32,13 +30,20 @@ export default defineConfig(({ mode }) => {
 
   config.root = `./${buildDir}`;
 
-  if (mode === 'development') {
+  if (isLocal) {
     config.server = {
       port: devServerPort,
     };
 
-    config.plugins!.push(vueDevTools());
+    // config.plugins!.push(vueDevTools());
   } else {
+    config.plugins!.push(
+      ViteMinifyPlugin({
+        removeComments: true,
+        collapseWhitespace: true,
+      })
+    );
+
     config.plugins!.push(
       viteStaticCopy({
         targets: [

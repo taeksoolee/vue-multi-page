@@ -1,10 +1,10 @@
 // import { createApp as createVueApp } from 'vue';
 import { ViteSSG } from 'vite-ssg';
+import { createPinia } from 'pinia';
 import App from '@web/App.vue';
 
 import { router } from '@web/routes';
-import { createPinia } from 'pinia';
-import { useBootStore } from './store';
+import { useBootStore } from '@web/store';
 
 const isDev = import.meta.env.MODE === 'development';
 const isLocal = import.meta.env.VITE_MODE === 'local';
@@ -29,7 +29,6 @@ export const createApp = ViteSSG(
       if (!bootStore.ready) {
         // perform the (user-implemented) store action to fill the store's state
         bootStore.initialize(isLocal ? 'local' : isDev ? 'development' : 'production');
-        console.log('loaded pinia 🥕');
       }
       next();
     })
